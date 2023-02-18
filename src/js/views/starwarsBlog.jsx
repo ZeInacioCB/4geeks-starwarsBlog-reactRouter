@@ -4,7 +4,7 @@ import "../../styles/home.css";
 
 import ResourceCards from "../component/personCard.jsx"
 
-export const Home = () => (
+export const StarWarsBlog = () => (
 	<div>
 		<ResourceCards />
 	</div>

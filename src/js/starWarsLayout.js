@@ -1,14 +1,13 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
-
-import { Home } from "./views/home";
-import { Demo } from "./views/demo";
-import { Single } from "./views/single";
+import { StarWarsNavbar } from "./component/starwarsNavbar.jsx";
+import { StarWarsBlog } from "./views/starwarsBlog.jsx";
+import { PersonView } from "./views/personView.jsx";
+import { PlanetView } from "./views/planetView.jsx";
+import { StarshipView } from "./views/starshipView.jsx";
 import injectContext from "./store/appContext";
 
-import { Navbar } from "./component/navbar";
-//import { Footer } from "./component/footer";
 
 //create your first component
 const StarWarsLayout = () => {
@@ -20,11 +19,12 @@ const StarWarsLayout = () => {
 		<div>
 			<BrowserRouter basename={basename}>
 				<ScrollToTop>
-					<Navbar />
+					<StarWarsNavbar />
 					<Routes>
-						<Route path="/" element={<Home />} />
-						<Route path="/demo" element={<Demo />} />
-						<Route path="/single/:theid" element={<Single />} />
+						<Route path="/" element={<StarWarsBlog />} />
+						<Route path="/people/:uid" element={<PersonView />} />
+						<Route path="/planets/:uid" element={<PlanetView />} />
+						<Route path="/starships/:uid" element={<StarshipView />} />
 						<Route path="*" element={<h1>Not found!</h1>} />
 					</Routes>
 				</ScrollToTop>

@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import starWarsLogo from "../../img/star-wars-512.png";
 
-export const Navbar = () => {
+export const StarWarsNavbar = () => {
 	return (
 		<nav className="navbar navbar-light bg-light container-fluid py-0 px-4">
 			<Link className="navbar-brand mb-0" to="/">
