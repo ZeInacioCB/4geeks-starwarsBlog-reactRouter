@@ -2,45 +2,13 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-const ResourceCards = () => {
-    return (
-        <div>
-            <ResourceCardType title="Characters" type="people" color="success" />
-            <ResourceCardType title="Planets" type="planets" color="primary" />
-            <ResourceCardType title="Starships" type="starships" color="danger" />
-        </div>)
-}
-
-const ResourceCardType = ({title, type, color}) => { 
-    // set character state to get information from SWAPI
-    const [characters, setCharacters] = useState(null);
-    // defining URL to connect to SWAPI
-    const apiUrl = `https://www.swapi.tech/api/${type}/`;
-    
-    useEffect(() => { // connect to SWAPI once when component mounts    
-        fetch(apiUrl)
-        .then(res => res.json())
-        .then(data => setCharacters(data.results))
-        .catch(err => console.error(err))
-    }, []);
-
-    const cardsBuilder = characters?.map((character) => <ResourceCard type={type} uid={character.uid} color={color} key={character.uid} />)
-    
-    if (!characters) return <p>Loading...</p>;
-    else return  (
-        <div>
-            <h2>{title}</h2>
-            <div className="d-flex mt-1">{cardsBuilder}</div>
-        </div>)
-};
-
-const ResourceCard = ({type, uid, color}) => {
+const ResourceCardUnit = ({type, uid, color}) => {
     // set character state to get information from SWAPI
     const [character, setCharacter] = useState(null);
     // defining URL to connect to SWAPI
     const apiUrl = `https://www.swapi.tech/api/${type}/${uid}`;
-    
-    useEffect(() => { // connect to SWAPI once when component mounts    
+    // connect to SWAPI once when component mounts 
+    useEffect(() => {    
         fetch(apiUrl)
         .then(res => res.json())
         .then(data => setCharacter(data))
@@ -80,4 +48,4 @@ const ResourceCard = ({type, uid, color}) => {
     )
 }
 
-export default ResourceCards;
+export default ResourceCardUnit;
