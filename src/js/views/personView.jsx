@@ -9,6 +9,7 @@ export const PersonView = props => {
 		<div className="jumbotron">
 			<h1>Hello</h1>
             <p>{uid}</p>
+            <img src="https://starwars-visualguide.com/assets/img/characters/1.jpg" alt="" />
 		</div>
 	);
 };
