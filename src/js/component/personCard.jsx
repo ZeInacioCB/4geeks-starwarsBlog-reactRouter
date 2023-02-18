@@ -72,7 +72,7 @@ const ResourceCard = ({type, uid, color}) => {
                 <p className="card-text">{character?.result.description}</p>
                 <Link to={`/${type}/${uid}/`}>
                     <span className={`btn btn-${color}`} href="#" role="button">
-                        See {character?.result.properties.name}
+                        See More
                     </span>
                 </Link>
             </div>

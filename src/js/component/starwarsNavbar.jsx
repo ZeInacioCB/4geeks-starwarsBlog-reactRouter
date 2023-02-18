@@ -4,10 +4,10 @@ import starWarsLogo from "../../img/star-wars-512.png";
 
 export const StarWarsNavbar = () => {
 	return (
-		<nav className="navbar navbar-light bg-light container-fluid py-0 px-4">
+		<nav className="navbar navbar-dark bg-dark container-fluid border-bottom border-light py-0 px-4">
 			<Link className="navbar-brand mb-0" to="/">
 				<span className="navbar-brand mb-0">
-					<img src={starWarsLogo} alt="Star Wars Logo" width="60" height="56"></img>
+					<img src={starWarsLogo} alt="Star Wars Logo" width="80" height="56"></img>
 				</span>
 			</Link>
 			<div className="dropdown">
