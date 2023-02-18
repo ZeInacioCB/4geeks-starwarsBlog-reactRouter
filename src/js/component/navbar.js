@@ -4,7 +4,7 @@ import starWarsLogo from "../../img/star-wars-512.png";
 
 export const Navbar = () => {
 	return (
-		<nav className="navbar navbar-light bg-light container-fluid py-0 px-4 mb-3">
+		<nav className="navbar navbar-light bg-light container-fluid py-0 px-4">
 			<Link className="navbar-brand mb-0" to="/">
 				<span className="navbar-brand mb-0">
 					<img src={starWarsLogo} alt="Star Wars Logo" width="60" height="56"></img>
