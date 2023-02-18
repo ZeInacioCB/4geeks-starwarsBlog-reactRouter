@@ -26,14 +26,22 @@ const ResourceCardUnit = ({type, uid, color}) => {
         e.currentTarget.src = 'https://starwars-visualguide.com/assets/img/placeholder.jpg';
     }
 
-    if (!character) return <p>Loading...</p>;
+    const imgStyles = {
+        maxHeight: "450px",
+        objectFit: "cover",
+        objectPosition: "top"
+    }
+
+    if (!character) return null;
     else return (
         <div key={uid} className="card col-4">
             <img 
                 src={`https://starwars-visualguide.com/assets/img/${translateImgUrl(type)}/${uid}.jpg`} 
                 onError={onErrorHandler} 
-                className="card-img-top" 
-                alt={character?.result.properties.name}>
+                className="card-img-top img-fluid" 
+                alt={character?.result.properties.name}
+                style={imgStyles}
+            >
             </img>
             <div className="card-body m-2">
                 <h5 className="card-title" >{character?.result.properties.name}</h5>

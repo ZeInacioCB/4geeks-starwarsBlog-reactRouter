@@ -19,11 +19,11 @@ const ResourceCards = ({title, type, color}) => {
 
     const cardsBuilder = characters?.map((character) => <ResourceCardUnit type={type} uid={character.uid} color={color} key={character.uid} />)
     
-    if (!characters) return <p>Loading...</p>;
+    if (!characters) return <p style={{color: "yellow"}}>Loading...</p>;
     else return  (
         <div>
             <CardsTitle title={title} />
-            <div className="d-flex mt-1">{cardsBuilder}</div>
+            <div className="d-flex flex-row flex-nowrap overflow-auto">{cardsBuilder}</div>
         </div>)
 };
 
