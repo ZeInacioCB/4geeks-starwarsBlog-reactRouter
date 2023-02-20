@@ -31,11 +31,21 @@ export const PersonView = props => {
 		return <FeatureLi key={feature} featureKey={feature} featureDescription={character?.result.properties[feature]} />
 	});
 
+	const onErrorHandler = e => {
+        e.currentTarget.onerror = null;
+        e.currentTarget.src = 'https://starwars-visualguide.com/assets/img/placeholder.jpg';
+    }
+
 	return (
 		<div className="card my-5 mx-auto bg-dark" style={{maxWidth: "90%"}}>
 			<div className="row g-0">
 				<div className="col-md-4">
-					<img src={`https://starwars-visualguide.com/assets/img/characters/${uid}.jpg`} className="img-fluid rounded-start" alt="" />
+					<img 
+						src={`https://starwars-visualguide.com/assets/img/characters/${uid}.jpg`} 
+						className="img-fluid rounded-start" 
+						onError={onErrorHandler} 
+						alt={`Starwards Character: ${character?.result.properties.name}`}
+					/>
 				</div>
 				<div className="col-md-8">
 					<div className="card-body ps-5">
