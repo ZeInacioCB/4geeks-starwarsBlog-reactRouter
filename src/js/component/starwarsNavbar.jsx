@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useContext} from "react";
 import { Link } from "react-router-dom";
 import starWarsLogo from "../../img/star-wars-512.png";
+import { Context } from "../store/appContext";
 
-export const StarWarsNavbar = () => {
+export const StarWarsNavbar = ({ favourites }) => {
+	const { store, actions } = useContext(Context);
+
 	return (
 		<nav className="navbar navbar-dark bg-dark container-fluid border-bottom border-light py-0">
 			<Link className="navbar-brand mb-0" to="/">
@@ -10,23 +13,56 @@ export const StarWarsNavbar = () => {
 					<img src={starWarsLogo} alt="Star Wars Logo" width="80" height="56"></img>
 				</span>
 			</Link>
-			<div className="dropdown">
-				<button className="btn btn-info dropdown-toggle m-1" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-					Favourites
-				</button>
-				<ul className="dropdown-menu dropdown-menu-end">
-					<li>
-						<Link className="dropdown-item" to="/">
-							Dark Vader
-						</Link>
-					</li>
-					<li>
-						<Link className="dropdown-item" to="/">
-							Mestre Jedi
-						</Link>
-					</li>
-				</ul>
-			</div>
+			<StarwarsFavorites favourites={favourites}  />
+			<StarwarsFavoritesContext favourites={store.favourites}  />
+			<button className="btn btn-success" onClick={actions.logStuff}>Log Context</button>
 		</nav>
 	);
 };
+
+
+export const StarwarsFavoritesContext = ({ favourites }) => {
+
+	const listBuilder = favourites.map((favourite) => {
+		return (
+			<li key={favourite.name}>
+				<Link className="dropdown-item" to={favourite.uri}>
+					{favourite.name}
+				</Link>
+			</li>
+		);
+	})
+
+	return (
+		<div className="dropdown">
+			<button className="btn btn-info dropdown-toggle m-1" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+				FavouritesContext <span className="badge bg-warning">{favourites.length}</span>
+			</button>
+			<ul className="dropdown-menu dropdown-menu-end">
+				{listBuilder}
+			</ul>
+		</div>);
+}
+
+export const StarwarsFavorites = ({ favourites }) => {
+
+	const listBuilder = favourites.map((favourite) => {
+		return (
+			<li key={favourite.name}>
+				<Link className="dropdown-item" to={favourite.uri}>
+					{favourite.name}
+				</Link>
+			</li>
+		);
+	})
+	
+	return (
+		<div className="dropdown">
+			<button className="btn btn-info dropdown-toggle m-1" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+				Favourites <span className="badge bg-warning">{favourites.length}</span>
+			</button>
+			<ul className="dropdown-menu dropdown-menu-end">
+				{listBuilder}
+			</ul>
+		</div>);
+}

@@ -1,13 +1,12 @@
 import React from "react";
-import starWars from "../../img/star-wars-512.png";
 import "../../styles/home.css";
 
 import ResourceCards from "../component/resourceCards.jsx"
 
-export const StarWarsBlog = () => (
+export const StarWarsBlog = ({ onclick }) => (
 	<div>
-		<ResourceCards title="Characters" type="people" color="success" />
-		<ResourceCards title="Planets" type="planets" color="primary" />
-		<ResourceCards title="Starships" type="starships" color="danger" />
+		<ResourceCards title="Characters" type="people" color="success" onclick={onclick} />
+		<ResourceCards title="Planets" type="planets" color="primary" onclick={onclick} />
+		<ResourceCards title="Starships" type="starships" color="danger" onclick={onclick} />
 	</div>
 );
