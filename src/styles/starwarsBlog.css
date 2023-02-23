@@ -5,7 +5,7 @@
 }
 
 .img-card-custom {
-    max-height: 325px;
+    max-height: 400px;
     object-fit: cover;
     object-position: 50% 30%;
 }

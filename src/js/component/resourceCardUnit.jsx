@@ -2,14 +2,18 @@ import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { imgErrorHandler } from "../utilities/utilities";
+import FavouriteButton from "./favouriteButton.jsx";
 
 const ResourceCardUnit = ({ type, uid, seeMoreColor }) => {
     // set context
     const { actions, store } = useContext(Context);
+
     // set character state to get information from SWAPI
     const [character, setCharacter] = useState(null);
+
     // defining URL to connect to SWAPI
     const apiUrl = `https://www.swapi.tech/api/${type}/${uid}`;
+
     // connect to SWAPI once when component mounts 
     useEffect(() => {    
         if (localStorage.getItem(`/${type}/${uid}/data`) === 'true') {
@@ -27,6 +31,7 @@ const ResourceCardUnit = ({ type, uid, seeMoreColor }) => {
         }
     }, []);
 
+    // translator to get the proper images from starwars-visualguide assets
     const translateImgUrl = (type) => {
         if (type === 'people') return 'characters';
         if (type === 'planets') return 'planets';
@@ -51,14 +56,10 @@ const ResourceCardUnit = ({ type, uid, seeMoreColor }) => {
                         See More
                     </span>
                 </Link>
-                <button 
-                    className="btn btn-outline-warning ms-1 "
-                    onClick={actions.favouritesClickHandler}
-                    value={`/${type}/${uid}`}
+                <FavouriteButton 
+                    uri={`/${type}/${uid}`}
                     name={character?.properties.name}
-                    >
-                    <span><i className="fa fa-regular fa-heart"></i></span>
-                </button>
+                />
             </div>
         </div>
     )

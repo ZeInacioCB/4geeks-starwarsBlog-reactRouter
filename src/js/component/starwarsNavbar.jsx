@@ -13,14 +13,14 @@ export const StarWarsNavbar = () => {
 					<img src={starWarsLogo} alt="Star Wars Logo" width="80" height="56"></img>
 				</span>
 			</Link>
-			<StarwarsFavoritesContext />
+			<StarwarsFavoritesDropdown />
 			<button className="btn btn-success" onClick={actions.logStuff}>Log Context</button>
 		</nav>
 	);
 };
 
 
-export const StarwarsFavoritesContext = () => {
+export const StarwarsFavoritesDropdown = () => {
 	const { store } = useContext(Context);
 
 	const listBuilder = store.favourites.map((favourite) => {

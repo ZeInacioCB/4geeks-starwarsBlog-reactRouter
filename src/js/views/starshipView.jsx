@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import { Link, useParams } from "react-router-dom";
-import { Context } from "../store/appContext";
+import { useParams } from "react-router-dom";
 import { FeatureLi, FeatureLink } from "../component/features.jsx";
+import FavouriteButton from "../component/favouriteButton.jsx";
 import { imgErrorHandler } from "../utilities/utilities";
 
 export const StarshipView = () => {
@@ -48,7 +48,15 @@ export const StarshipView = () => {
 				</div>
 				<div className="col-md-8">
 					<div className="card-body ps-5">
-						<h5 className="card-title fs-2" style={{color: "yellow"}}>{character?.result.properties.name}</h5>
+						<h5 className="card-title fs-2" style={{color: "yellow"}}>
+							{character?.result.properties.name} 
+							<span className="ps-2 justify-content-center">
+								<FavouriteButton
+									uri={`/starships/${uid}`}
+									name={character?.result.properties.name}
+								/>
+							</span>
+						</h5>
 						{featuresBuilder}
 					</div>
 				</div>
