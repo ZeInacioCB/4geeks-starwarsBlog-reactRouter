@@ -33,12 +33,6 @@ const ResourceCardUnit = ({ type, uid, seeMoreColor }) => {
         if (type === 'starships') return 'starships';
     }
 
-    const imgStyles = {
-        maxHeight: "450px",
-        objectFit: "cover",
-        objectPosition: "top"
-    }
-
     if (!character) return null;
     else return (
         <div key={uid} className="card col-4">
@@ -47,7 +41,6 @@ const ResourceCardUnit = ({ type, uid, seeMoreColor }) => {
                 onError={imgErrorHandler} 
                 className="card-img-top img-fluid" 
                 alt={character?.properties.name}
-                style={imgStyles}
             >
             </img>
             <div className="card-body m-2">

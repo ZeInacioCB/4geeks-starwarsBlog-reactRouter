@@ -11,4 +11,5 @@ export const snakeToUpperWord = str => {
 export const imgErrorHandler = e => {
   e.currentTarget.onerror = null;
   e.currentTarget.src = 'https://starwars-visualguide.com/assets/img/placeholder.jpg';
+  e.currentTarget.className = 'card-img-top img-fluid img-card-custom';
 }

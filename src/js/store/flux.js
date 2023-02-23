@@ -1,23 +1,14 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			favourites:[]
+			favourites: []
 		},
 		actions: {
-			loadSomeData: () => {
+			loadFavourites: () => {
 				//fetch().then().then(data => setStore({ "foo": data.bar }))
-				if (localStorage.getItem(`list/${type}/data`) === "true") {
+				if (localStorage.getItem(`doFavouritesExist`) === "true") {
 					const localListResults = JSON.parse(localStorage.getItem(`list/${type}/json`));
 					setStore({"favourites": localListResults});
-				} else {
-					fetch(apiUrl)
-					.then(res => res.json())
-					.then(data => {
-						setStore({"favourites": data.results});
-						localStorage.setItem(`list/${type}/data`, 'true');
-						localStorage.setItem(`list/${type}/json`, JSON.stringify(data.results));
-					})
-					.catch(err => console.error(err))
 				}       
 			},
 			// Click Handler to add and remove favourites
