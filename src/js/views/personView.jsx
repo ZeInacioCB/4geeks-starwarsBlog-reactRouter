@@ -1,18 +1,24 @@
 import React, { useState, useEffect, useContext } from "react";
 import PropTypes from "prop-types";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { FeatureLi, FeatureLink } from "../component/features.jsx";
 import { imgErrorHandler } from "../utilities/utilities.js";
 
-export const PersonView = props => {
+export const PersonView = () => {
+	// get context store and actions
+	const { store, actions } = useContext(Context);
+
 	// set character state to get information from SWAPI
     const [character, setCharacter] = useState(null);
 	const [features, setFeatures] = useState(null);
+
     // useParams hook to get uid from URL link
 	const { uid } = useParams();
+
 	// defining URL to connect to SWAPI
-	const apiUrl = `https://www.swapi.tech/api/people/${uid}`
+	const apiUrl = `https://www.swapi.tech/api/people/${uid}`;
+
     // connect to SWAPI once when component mounts 
     useEffect(() => {    
         fetch(apiUrl)
@@ -45,7 +51,19 @@ export const PersonView = props => {
 				</div>
 				<div className="col-md-8">
 					<div className="card-body ps-5">
-						<h5 className="card-title fs-2" style={{color: "yellow"}}>{character?.result.properties.name}</h5>
+						<h5 className="card-title fs-2" style={{color: "yellow"}}>
+							{character?.result.properties.name}   
+							<span className="ps-2">
+								<button 
+									className="btn btn-outline-warning ms-1" 
+									onClick={actions.favouritesClickHandler}
+									value={`/people/${uid}`}
+									name={character?.result.properties.name}
+									>
+									<span><i className="fa fa-regular fa-heart"></i></span>
+								</button>
+							</span>
+						</h5>
 						<p className="card-text text-light" >This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
 						{featuresBuilder}
 					</div>
