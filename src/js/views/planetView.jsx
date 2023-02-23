@@ -26,6 +26,9 @@ export const PlanetView = () => {
     }, []);
 
 	const featuresBuilder = features?.map((feature) => {
+		if (["created", "edited", "url"].includes(feature)) {
+			return null;
+		}
 		if (character?.result.properties[feature].slice(0, 5) === "https") {
 			return <FeatureLink key={feature} featureKey={feature} url={character?.result.properties[feature]} />
 		}

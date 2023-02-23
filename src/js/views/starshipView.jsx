@@ -26,6 +26,13 @@ export const StarshipView = () => {
     }, []);
 
 	const featuresBuilder = features?.map((feature) => {
+		
+		if (!character?.result.properties[feature].length) {
+			return null;
+		}
+		if (["created", "edited", "url"].includes(feature)) {
+			return null;
+		}
 		if (character?.result.properties[feature].slice(0, 5) === "https") {
 			return <FeatureLink key={feature} featureKey={feature} url={character?.result.properties[feature]} />
 		}
