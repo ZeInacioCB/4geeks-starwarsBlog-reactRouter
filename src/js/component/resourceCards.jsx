@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ResourceCardUnit from "./resourceCardUnit.jsx";
-import CardsTitle from "./cardsTitle.jsx";
 
-const ResourceCards = ({title, type, color, onclick}) => { 
+const ResourceCards = ({ title, type, seeMoreColor }) => { 
     // set character state to get information from SWAPI
     const [characters, setCharacters] = useState(null);
     // defining URL to connect to SWAPI
@@ -28,18 +27,21 @@ const ResourceCards = ({title, type, color, onclick}) => {
     const cardsBuilder = characters?.map((character) => <ResourceCardUnit 
         type={type} 
         uid={character.uid} 
-        color={color} 
+        seeMoreColor={seeMoreColor} 
         key={character.uid}
-        favourite="btn btn-outline-warning"
-        onclick={onclick} />)
+        />)
     
     if (!characters) return <p style={{color: "yellow"}}>Loading...</p>;
     else return  (
         <div>
             <CardsTitle title={title} />
             <div className="d-flex flex-row flex-nowrap overflow-auto">{cardsBuilder}</div>
-        </div>)
+        </div>);
 };
 
+
+const CardsTitle = ({title}) => {
+    return <h2 className="mt-2 mb-3 py-3 cards-title">{title}</h2>
+}
 
 export default ResourceCards;

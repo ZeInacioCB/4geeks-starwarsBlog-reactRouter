@@ -1,12 +1,12 @@
 import React from "react";
-import "../../styles/home.css";
+import "../../styles/starwarsBlog.css";
 
 import ResourceCards from "../component/resourceCards.jsx"
 
-export const StarWarsBlog = ({ onclick }) => (
+export const StarWarsBlog = () => (
 	<div>
-		<ResourceCards title="Characters" type="people" color="success" onclick={onclick} />
-		<ResourceCards title="Planets" type="planets" color="primary" onclick={onclick} />
-		<ResourceCards title="Starships" type="starships" color="danger" onclick={onclick} />
+		<ResourceCards title="Characters" type="people" seeMoreColor="success" />
+		<ResourceCards title="Planets" type="planets" seeMoreColor="primary" />
+		<ResourceCards title="Starships" type="starships" seeMoreColor="danger" />
 	</div>
 );

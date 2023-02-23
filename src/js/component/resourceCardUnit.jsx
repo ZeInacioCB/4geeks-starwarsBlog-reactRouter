@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { imgErrorHandler } from "../utilities/utilities";
 
-const ResourceCardUnit = ({type, uid, color, favourite, onclick}) => {
+const ResourceCardUnit = ({ type, uid, seeMoreColor }) => {
     // set context
     const { actions, store } = useContext(Context);
     // set character state to get information from SWAPI
@@ -54,20 +54,12 @@ const ResourceCardUnit = ({type, uid, color, favourite, onclick}) => {
                 <h5 className="card-title" >{character?.properties.name}</h5>
                 <p className="card-text">{character?.description}</p>
                 <Link to={`/${type}/${uid}/`}>
-                    <span className={`btn btn-${color}`} href="#" role="button">
+                    <span className={`btn btn-${seeMoreColor}`} href="#" role="button">
                         See More
                     </span>
                 </Link>
                 <button 
-                    className={`${favourite} ms-1`} 
-                    onClick={(e) => onclick(e.currentTarget)}
-                    value={`/${type}/${uid}`}
-                    name={character?.properties.name}
-                    >
-                    <span><i className="fa fa-regular fa-heart"></i></span>
-                </button>
-                <button 
-                    className={`${favourite} ms-1`} 
+                    className="btn btn-outline-warning ms-1 "
                     onClick={actions.favouritesClickHandler}
                     value={`/${type}/${uid}`}
                     name={character?.properties.name}
