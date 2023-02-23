@@ -2,7 +2,8 @@ import React, { useState, useEffect, useContext } from "react";
 import PropTypes from "prop-types";
 import { Link, useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
-import { FeatureLi, FeatureLink } from "../component/features.jsx"
+import { FeatureLi, FeatureLink } from "../component/features.jsx";
+import { imgErrorHandler } from "../utilities/utilities.js";
 
 export const PlanetView = () => {
 	// set character state to get information from SWAPI
@@ -30,11 +31,6 @@ export const PlanetView = () => {
 		}
 		return <FeatureLi key={feature} featureKey={feature} featureDescription={character?.result.properties[feature]} />
 	});
-	
-	const onErrorHandler = e => {
-        e.currentTarget.onerror = null;
-        e.currentTarget.src = 'https://starwars-visualguide.com/assets/img/placeholder.jpg';
-    }
 
 	return (
 		<div className="card my-5 mx-auto bg-dark" style={{maxWidth: "90%"}}>
@@ -43,7 +39,7 @@ export const PlanetView = () => {
 					<img 
 						src={`https://starwars-visualguide.com/assets/img/planets/${uid}.jpg`} 
 						className="img-fluid rounded-start" 
-						onError={onErrorHandler} 
+						onError={imgErrorHandler} 
 						alt={`Starwards Character: ${character?.result.properties.name}`} 
 					/>
 				</div>

@@ -1,8 +1,11 @@
-import React from "react";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
+import { Context } from "../store/appContext";
+import { imgErrorHandler } from "../utilities/utilities";
 
 const ResourceCardUnit = ({type, uid, color, favourite, onclick}) => {
+    // set context
+    const { actions, store } = useContext(Context);
     // set character state to get information from SWAPI
     const [character, setCharacter] = useState(null);
     // defining URL to connect to SWAPI
@@ -30,11 +33,6 @@ const ResourceCardUnit = ({type, uid, color, favourite, onclick}) => {
         if (type === 'starships') return 'starships';
     }
 
-    const onErrorHandler = e => {
-        e.currentTarget.onerror = null;
-        e.currentTarget.src = 'https://starwars-visualguide.com/assets/img/placeholder.jpg';
-    }
-
     const imgStyles = {
         maxHeight: "450px",
         objectFit: "cover",
@@ -46,7 +44,7 @@ const ResourceCardUnit = ({type, uid, color, favourite, onclick}) => {
         <div key={uid} className="card col-4">
             <img 
                 src={`https://starwars-visualguide.com/assets/img/${translateImgUrl(type)}/${uid}.jpg`} 
-                onError={onErrorHandler} 
+                onError={imgErrorHandler} 
                 className="card-img-top img-fluid" 
                 alt={character?.properties.name}
                 style={imgStyles}
@@ -63,6 +61,14 @@ const ResourceCardUnit = ({type, uid, color, favourite, onclick}) => {
                 <button 
                     className={`${favourite} ms-1`} 
                     onClick={(e) => onclick(e.currentTarget)}
+                    value={`/${type}/${uid}`}
+                    name={character?.properties.name}
+                    >
+                    <span><i className="fa fa-regular fa-heart"></i></span>
+                </button>
+                <button 
+                    className={`${favourite} ms-1`} 
+                    onClick={actions.favouritesClickHandler}
                     value={`/${type}/${uid}`}
                     name={character?.properties.name}
                     >

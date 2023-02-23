@@ -4,7 +4,7 @@ import starWarsLogo from "../../img/star-wars-512.png";
 import { Context } from "../store/appContext";
 
 export const StarWarsNavbar = ({ favourites }) => {
-	const { store, actions } = useContext(Context);
+	const { actions } = useContext(Context);
 
 	return (
 		<nav className="navbar navbar-dark bg-dark container-fluid border-bottom border-light py-0">
@@ -14,7 +14,7 @@ export const StarWarsNavbar = ({ favourites }) => {
 				</span>
 			</Link>
 			<StarwarsFavorites favourites={favourites}  />
-			<StarwarsFavoritesContext favourites={store.favourites}  />
+			<StarwarsFavoritesContext />
 			<button className="btn btn-success" onClick={actions.logStuff}>Log Context</button>
 		</nav>
 	);
@@ -22,8 +22,9 @@ export const StarWarsNavbar = ({ favourites }) => {
 
 
 export const StarwarsFavoritesContext = ({ favourites }) => {
+	const { store } = useContext(Context);
 
-	const listBuilder = favourites.map((favourite) => {
+	const listBuilder = store.favourites.map((favourite) => {
 		return (
 			<li key={favourite.name}>
 				<Link className="dropdown-item" to={favourite.uri}>
@@ -36,7 +37,7 @@ export const StarwarsFavoritesContext = ({ favourites }) => {
 	return (
 		<div className="dropdown">
 			<button className="btn btn-info dropdown-toggle m-1" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-				FavouritesContext <span className="badge bg-warning">{favourites.length}</span>
+				FavouritesContext <span className="badge bg-warning">{store.favourites.length}</span>
 			</button>
 			<ul className="dropdown-menu dropdown-menu-end">
 				{listBuilder}

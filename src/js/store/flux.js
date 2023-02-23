@@ -1,48 +1,7 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			favourites:[
-				{
-				  "uid": "1",
-				  "name": "Luke Skywalker",
-				  "url": "https://www.swapi.tech/api/people/1"
-				},
-				{
-				  "uid": "2",
-				  "name": "C-3PO",
-				  "url": "https://www.swapi.tech/api/people/2"
-				},
-				{
-				  "uid": "3",
-				  "name": "R2-D2",
-				  "url": "https://www.swapi.tech/api/people/3"
-				},
-				{
-				  "uid": "4",
-				  "name": "Darth Vader",
-				  "url": "https://www.swapi.tech/api/people/4"
-				},
-				{
-				  "uid": "5",
-				  "name": "Leia Organa",
-				  "url": "https://www.swapi.tech/api/people/5"
-				},
-				{
-				  "uid": "6",
-				  "name": "Owen Lars",
-				  "url": "https://www.swapi.tech/api/people/6"
-				},
-				{
-				  "uid": "8",
-				  "name": "R5-D4",
-				  "url": "https://www.swapi.tech/api/people/8"
-				},
-				{
-				  "uid": "10",
-				  "name": "Obi-Wan Kenobi",
-				  "url": "https://www.swapi.tech/api/people/10"
-				}
-			  ]
+			favourites:[]
 		},
 		actions: {
 			loadSomeData: () => {
@@ -66,8 +25,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				//get the store
 				const store = getStore();
 				// declaring the new favourite resource to be added or removed
-				const newFav = {name: e.name, uri: e.value};
-
+				const newFav = {name: e.currentTarget.name, uri: e.currentTarget.value};
 				// removing from the favourites list if already exists
 				if (store.favourites.some( favourite => favourite['name'] === newFav.name )) {
 					e.className = 'btn btn-outline-warning ms-1';
@@ -78,7 +36,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				} else {
 					e.className = 'btn btn-warning ms-1';
 					//reset the global store
-					setStore({ favourites: prev => [...prev, newFav] });
+					setStore({ favourites: [...store.favourites, newFav] });
 				}
 			},
 			changeColor: (index, color) => {
