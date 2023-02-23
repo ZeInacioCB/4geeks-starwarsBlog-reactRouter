@@ -5,11 +5,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 		},
 		actions: {
 			loadFavourites: () => {
-				//fetch().then().then(data => setStore({ "foo": data.bar }))
-				if (localStorage.getItem(`doFavouritesExist`) === "true") {
-					const localListResults = JSON.parse(localStorage.getItem(`list/${type}/json`));
-					setStore({"favourites": localListResults});
-				}       
+				// get the store
+				const store = getStore();
+				// get the stored favourites from local storage if they exists
+				if(Object.keys(window.localStorage).includes("favourites")) {
+					const storedFavourites = JSON.parse(window.localStorage.getItem("favourites"))
+					setStore({ favourites: storedFavourites });
+				}
 			},
 			// Click Handler to add and remove favourites
 			favouritesClickHandler: (e) => {
@@ -29,7 +31,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 					//reset the global store
 					setStore({ favourites: [...store.favourites, newFav] });
 				}
+
+				// store the values into localStorage
+				localStorage.setItem("favourites", JSON.stringify(store.favourites));
 			},
+			// check if an uri exist or not in the store favourites list
 			isFavourite: (uri) => {
 				//get the store
 				const store = getStore();

@@ -14,7 +14,6 @@ export const StarWarsNavbar = () => {
 				</span>
 			</Link>
 			<StarwarsFavoritesDropdown />
-			<button className="btn btn-success" onClick={actions.logStuff}>Log Context</button>
 		</nav>
 	);
 };
